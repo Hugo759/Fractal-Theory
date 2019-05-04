@@ -1,0 +1,38 @@
+# Koch curve
+import turtle  # turtle, The Turtle library is a function library for drawing images in Python.
+
+# https://docs.python.org/3.3/library/turtle.html?highlight=turtle
+
+turtle.setup(1500)  # setup(width,height,startx,starty), the position and size of the form
+turtle.screensize(1500, 400,
+                  "black")  # screensize(canvwidth=None, canvheight=None, bg=None)，the width of the canvas (in
+# pixels), height, and background color.
+turtle.pensize(2)  # Brush width
+turtle.penup()  # Lift the brush, no trace
+turtle.goto(-700, 0)  # Point the coordinates given in parentheses from the current position
+turtle.pendown()  # Drop the brush with traces
+turtle.hideturtle()  # Make the turtle invisible
+n = 0  # Order number
+
+
+def color(n):  # The odd or even number of orders determines the different colors of the brush
+    if n % 2 == 1:
+        turtle.pencolor('magenta')  # Brush color
+    else:
+        turtle.pencolor('blue')
+
+
+def koch_curve(n, len=260):  # Drawing a Koch curve
+    if n == 0:  # Straight line, the special case
+        turtle.fd(len)  # Run forward
+    else:
+        for i in [0, 60, -120, 60]:
+            turtle.left(i)  # Rotate different angles to the left
+            koch_curve(n - 1, len / 3)  # Recursive
+
+
+for n in [n, n + 1, n + 2, n + 3, n + 4]:
+    color(n)
+    koch_curve(n)
+
+turtle.done()
